@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.RelativeLayout;
 
@@ -56,5 +57,12 @@ public class ViewCoordinateActivity extends Activity {
     private int dp2px(int dp){
         float scale = getResources().getDisplayMetrics().density;
         return (int) (dp*scale + 0.5f);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.i("zhwilson", "activity水平触摸点：" + event.getX() + "-" + event.getRawX());
+        Log.i("zhwilson", "activity竖直触摸点：" + event.getY() + "-" + event.getRawY());
+        return super.onTouchEvent(event);
     }
 }

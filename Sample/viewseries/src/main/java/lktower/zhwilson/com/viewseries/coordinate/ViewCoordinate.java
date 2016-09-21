@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -47,5 +48,13 @@ public class ViewCoordinate extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawColor(Color.BLUE);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.i("zhwilson", "viewContent水平触摸点：" + event.getX() + "-" + event.getRawX());
+        Log.i("zhwilson", "viewContent竖直触摸点：" + event.getY() + "-" + event.getRawY());
+//        return super.onTouchEvent(event);
+        return false;
     }
 }
