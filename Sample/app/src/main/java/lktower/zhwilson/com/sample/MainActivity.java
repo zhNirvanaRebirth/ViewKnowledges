@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import lktower.zhwilson.com.sample.sections.ViewColorActivity;
 import lktower.zhwilson.com.sample.sections.ViewCoordinateActivity;
+import lktower.zhwilson.com.sample.sections.ViewProcessActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ViewColorActivity.class);
+                startActivity(intent);
+            }
+        });
+        //自定义流程
+        Button viewProcess = (Button) findViewById(R.id.view_process);
+        viewProcess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ViewProcessActivity.class);
                 startActivity(intent);
             }
         });
