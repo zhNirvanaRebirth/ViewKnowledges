@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import lktower.zhwilson.com.sample.sections.ViewColorActivity;
 import lktower.zhwilson.com.sample.sections.ViewCoordinateActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ViewCoordinateActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //颜色混合
+        Button viewColor = (Button) findViewById(R.id.view_color);
+        viewColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ViewColorActivity.class);
                 startActivity(intent);
             }
         });
