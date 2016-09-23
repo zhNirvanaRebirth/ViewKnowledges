@@ -29,5 +29,12 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="View自定义流程"/>
+        <Button
+            android:id="@+id/canvas_graph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Canvas基本图形操作"/>
     </LinearLayout>
 </ScrollView>

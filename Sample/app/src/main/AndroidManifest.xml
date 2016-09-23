@@ -22,6 +22,8 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".sections.ViewProcessActivity" android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".sections.CanvasGraphActivity" android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
     </application>
 
 </manifest>
