@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import lktower.zhwilson.com.sample.sections.CanvasGraphActivity;
+import lktower.zhwilson.com.sample.sections.PathActivity;
 import lktower.zhwilson.com.sample.sections.ViewColorActivity;
 import lktower.zhwilson.com.sample.sections.ViewCoordinateActivity;
 import lktower.zhwilson.com.sample.sections.ViewProcessActivity;
@@ -55,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CanvasGraphActivity.class);
+                startActivity(intent);
+            }
+        });
+        //Paht基本操作
+        Button pathBase = (Button) findViewById(R.id.path_base);
+        pathBase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PathActivity.class);
                 startActivity(intent);
             }
         });
