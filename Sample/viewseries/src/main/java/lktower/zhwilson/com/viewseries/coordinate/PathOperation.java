@@ -57,9 +57,36 @@ public class PathOperation extends View {
         pathPaint.setStrokeWidth(5);
         pathPaint.setColor(Color.BLACK);
         pathPaint.setStyle(Paint.Style.STROKE);
+//        Path path = new Path();
+//        path.lineTo(300, 300);
+//        //moveTo和setLastPoint的区别，moveTo不会对之前的操作造成影响，setLastPoint会对之前的操作造成影响（具体表现为会改变调用setLastPoint之前path的最后一个点的位置， 同时使倒数第二个点与最后一个点的连线随最后一个点的位置的改变而改变， 而moveTo仅仅是改变下一次操作的起点）
+//        path.moveTo(100, 200);
+////        path.setLastPoint(100, 200);
+//        path.lineTo(300, 0);
+////        canvas.drawPath(path, pathPaint);
+//        path.setLastPoint(400, 500);
+//        path.lineTo(600, 600);
+//        path.close();
+//        canvas.drawPath(path, pathPaint);
+
+        /**
+         * path 绘制基本图形
+         * 添加内容	addRect, addRoundRect, addOval, addCircle, addPath, addArc, arcTo	添加(矩形， 圆角矩形， 椭圆， 圆， 路径， 圆弧) 到当前Path (注意addArc和arcTo的区别)
+         */
+
         Path path = new Path();
-        path.lineTo(300, 300);
-        path.lineTo(300, 0);
+        /**
+         * Path.Direction是一个枚举，在绘制图形的时候记录各个点的顺序。 Path.Direction.CCW 逆时针； Path.Direction.CW 顺时针
+         * 比如，一个Rect（200， 200， 400， 400）；
+         * 如果是顺时针添加，依次的点为（200， 200）， （400， 200）， （400， 400）， （200， 400）
+         * 如果是逆时针添加，依次的点为（200， 200）， （200， 400）， （400， 400）， （400， 200）
+         *
+         * 可通过setLastPoint测试
+         */
+
+        path.addRect(200, 200, 400, 400, Path.Direction.CW);
+//        path.addRect(200, 200, 400, 400, Path.Direction.CCW);
+        path.setLastPoint(300, 300);
         canvas.drawPath(path, pathPaint);
     }
 }
