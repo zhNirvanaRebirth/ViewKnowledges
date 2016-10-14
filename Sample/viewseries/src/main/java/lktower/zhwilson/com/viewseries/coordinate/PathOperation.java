@@ -3,6 +3,7 @@ package lktower.zhwilson.com.viewseries.coordinate;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -85,8 +86,22 @@ public class PathOperation extends View {
          */
 
         path.addRect(200, 200, 400, 400, Path.Direction.CW);
-//        path.addRect(200, 200, 400, 400, Path.Direction.CCW);
+////        path.addRect(200, 200, 400, 400, Path.Direction.CCW);
         path.setLastPoint(300, 300);
+//        canvas.drawPath(path, pathPaint);
+
+        //将两个path进行合并
+        Path srcPath = new Path();
+        srcPath.addCircle(400, 400, 200, Path.Direction.CW);
+
+//        path.addPath(srcPath);
+        //dx:在添加srcPaht之前将srcPath在x轴上进行的位移长度；dy:在添加srcPaht之前将srcPath在y轴上进行的位移长度
+//        path.addPath(srcPath, 100, 100);
+        //matrix:在添加srcPath之前将srcPath进行matrix变化
+        Matrix matrix = new Matrix();
+        matrix.postTranslate(-100, -100);
+        path.addPath(srcPath, matrix);
         canvas.drawPath(path, pathPaint);
+
     }
 }
