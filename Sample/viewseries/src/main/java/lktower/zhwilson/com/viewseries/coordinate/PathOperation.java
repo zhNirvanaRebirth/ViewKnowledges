@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -91,17 +92,24 @@ public class PathOperation extends View {
 //        canvas.drawPath(path, pathPaint);
 
         //将两个path进行合并
-        Path srcPath = new Path();
-        srcPath.addCircle(400, 400, 200, Path.Direction.CW);
+//        Path srcPath = new Path();
+//        srcPath.addCircle(400, 400, 200, Path.Direction.CW);
 
 //        path.addPath(srcPath);
         //dx:在添加srcPaht之前将srcPath在x轴上进行的位移长度；dy:在添加srcPaht之前将srcPath在y轴上进行的位移长度
 //        path.addPath(srcPath, 100, 100);
         //matrix:在添加srcPath之前将srcPath进行matrix变化
-        Matrix matrix = new Matrix();
-        matrix.postTranslate(-100, -100);
-        path.addPath(srcPath, matrix);
-        canvas.drawPath(path, pathPaint);
+//        Matrix matrix = new Matrix();
+//        matrix.postTranslate(-100, -100);
+//        path.addPath(srcPath, matrix);
+//        canvas.drawPath(path, pathPaint);
 
+        //向path添加圆弧：startAngle：开始角度； sweepAngle：扫过的角度
+        //addArc:添加一个圆弧到path	直接添加一个圆弧到path中; arcTo:添加一个圆弧到path	添加一个圆弧到path，如果圆弧的起点和上次最后一个坐标点不相同，就连接两个点
+        RectF rectF = new RectF(200, 200, 600, 600);
+//        path.addArc(rectF, 0, 100);
+        //forceMoveTo:是否使用moveTo； true：将最后一个点移动到圆弧起点，即不连接最后一个点和圆弧起点； false：不移动，连接最后一个点与圆弧起点
+        path.arcTo(rectF, 0, 180, true);
+        canvas.drawPath(path, pathPaint);
     }
 }

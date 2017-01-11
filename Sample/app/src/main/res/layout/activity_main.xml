@@ -3,16 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <Button
             android:id="@+id/view_coordinate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="View坐标系"/>
+            android:text="View坐标系" />
 
         <Button
             android:id="@+id/view_color"
@@ -20,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="View颜色"/>
+            android:text="View颜色" />
 
         <Button
             android:id="@+id/view_process"
@@ -28,20 +30,54 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="View自定义流程"/>
+            android:text="View自定义流程" />
+
         <Button
             android:id="@+id/canvas_graph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="Canvas基本图形操作"/>
+            android:text="Canvas基本图形操作" />
+
         <Button
             android:id="@+id/path_base"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="Path基本操作"/>
+            android:text="Path基本操作" />
+
+        <Button
+            android:id="@+id/path_measure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Path花样" />
+
+        <Button
+            android:id="@+id/object_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="来个动画" />
+
+        <Button
+            android:id="@+id/drawable_clip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="扇形显示图片" />
+
+        <Button
+            android:id="@+id/path_apply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="path贝塞尔应用" />
     </LinearLayout>
 </ScrollView>
