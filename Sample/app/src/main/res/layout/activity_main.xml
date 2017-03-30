@@ -79,5 +79,13 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="path贝塞尔应用" />
+
+        <Button
+            android:id="@+id/path_ball"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="path弹跳球" />
     </LinearLayout>
 </ScrollView>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import lktower.zhwilson.com.sample.sections.AnimationActivity;
+import lktower.zhwilson.com.sample.sections.BounceBallActivity;
 import lktower.zhwilson.com.sample.sections.CanvasGraphActivity;
 import lktower.zhwilson.com.sample.sections.DrawableClipActivity;
 import lktower.zhwilson.com.sample.sections.PathActivity;
@@ -105,6 +106,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PathApplyActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //path贝塞尔弹跳球
+        Button pathball = (Button) findViewById(R.id.path_ball);
+        pathball.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BounceBallActivity.class);
                 startActivity(intent);
             }
         });
