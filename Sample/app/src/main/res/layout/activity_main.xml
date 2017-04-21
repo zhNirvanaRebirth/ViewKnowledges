@@ -87,5 +87,21 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="path弹跳球" />
+
+        <Button
+            android:id="@+id/matrix_poly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Matrix多边形控制" />
+
+        <Button
+            android:id="@+id/camera_rotation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Camera旋转中心的控制" />
     </LinearLayout>
 </ScrollView>

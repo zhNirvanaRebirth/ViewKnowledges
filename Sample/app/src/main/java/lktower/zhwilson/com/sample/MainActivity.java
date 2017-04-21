@@ -8,8 +8,10 @@ import android.widget.Button;
 
 import lktower.zhwilson.com.sample.sections.AnimationActivity;
 import lktower.zhwilson.com.sample.sections.BounceBallActivity;
+import lktower.zhwilson.com.sample.sections.Camera3dRotationActivity;
 import lktower.zhwilson.com.sample.sections.CanvasGraphActivity;
 import lktower.zhwilson.com.sample.sections.DrawableClipActivity;
+import lktower.zhwilson.com.sample.sections.MatrixPolyActivity;
 import lktower.zhwilson.com.sample.sections.PathActivity;
 import lktower.zhwilson.com.sample.sections.PathApplyActivity;
 import lktower.zhwilson.com.sample.sections.PathMeasureActivity;
@@ -116,6 +118,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, BounceBallActivity.class);
+                startActivity(intent);
+            }
+        });
+        //matrix多边形控制
+        Button matrixPoly = (Button) findViewById(R.id.matrix_poly);
+        matrixPoly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MatrixPolyActivity.class);
+                startActivity(intent);
+            }
+        });
+        //camera 旋转中心的控制
+        Button cameraRotation = (Button) findViewById(R.id.camera_rotation);
+        cameraRotation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Camera3dRotationActivity.class);
                 startActivity(intent);
             }
         });
