@@ -1,8 +1,10 @@
 package lktower.zhwilson.com.sample;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -10,11 +12,16 @@ import lktower.zhwilson.com.sample.sections.AnimationActivity;
 import lktower.zhwilson.com.sample.sections.BounceBallActivity;
 import lktower.zhwilson.com.sample.sections.Camera3dRotationActivity;
 import lktower.zhwilson.com.sample.sections.CanvasGraphActivity;
+import lktower.zhwilson.com.sample.sections.ColorActivity;
+import lktower.zhwilson.com.sample.sections.CoordinateActivity;
 import lktower.zhwilson.com.sample.sections.DrawableClipActivity;
+import lktower.zhwilson.com.sample.sections.HistogramActivity;
 import lktower.zhwilson.com.sample.sections.MatrixPolyActivity;
 import lktower.zhwilson.com.sample.sections.PathActivity;
 import lktower.zhwilson.com.sample.sections.PathApplyActivity;
 import lktower.zhwilson.com.sample.sections.PathMeasureActivity;
+import lktower.zhwilson.com.sample.sections.PropertyAnimationActivity;
+import lktower.zhwilson.com.sample.sections.SlipActivity;
 import lktower.zhwilson.com.sample.sections.ViewColorActivity;
 import lktower.zhwilson.com.sample.sections.ViewCoordinateActivity;
 import lktower.zhwilson.com.sample.sections.ViewProcessActivity;
@@ -139,5 +146,51 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //仿滑动删除
+        Button slipView = (Button) findViewById(R.id.slip);
+        slipView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SlipActivity.class);
+                startActivity(intent);
+            }
+        });
+        //属性动画
+        Button property = (Button) findViewById(R.id.property);
+        property.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PropertyAnimationActivity.class);
+                startActivity(intent);
+            }
+        });
+        //坐标
+        Button coordinate = (Button) findViewById(R.id.coordinate);
+        coordinate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CoordinateActivity.class);
+                startActivity(intent);
+            }
+        });
+        //颜色
+        Button colorProbe = (Button) findViewById(R.id.color_probe);
+        colorProbe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ColorActivity.class);
+                startActivity(intent);
+            }
+        });
+        //柱状图
+        Button histogram = (Button) findViewById(R.id.histogram);
+        histogram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, HistogramActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 }

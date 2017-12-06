@@ -103,5 +103,45 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="Camera旋转中心的控制" />
+
+        <Button
+            android:id="@+id/slip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="仿滑动删除" />
+
+        <Button
+            android:id="@+id/property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="属性动画" />
+
+        <Button
+            android:id="@+id/coordinate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="坐标" />
+
+        <Button
+            android:id="@+id/color_probe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="颜色" />
+
+        <Button
+            android:id="@+id/histogram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="柱状图" />
     </LinearLayout>
 </ScrollView>

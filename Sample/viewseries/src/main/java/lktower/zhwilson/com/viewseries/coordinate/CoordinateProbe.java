@@ -1,0 +1,55 @@
+package lktower.zhwilson.com.viewseries.coordinate;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+
+/**
+ * Created by zhwilson on 2017/12/4.
+ */
+public class CoordinateProbe extends View {
+    public CoordinateProbe(Context context) {
+        this(context, null);
+    }
+
+    public CoordinateProbe(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public CoordinateProbe(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        canvas.drawColor(Color.GREEN);
+        canvas.translate(200, 300);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        Log.e("zhwilson", "viewX:" + getX()
+                + "viewY:" + getY()
+                + "x:" + event.getX()
+                + "y:" + event.getY()
+                + "rawX:" + event.getRawX()
+                + "rawY:" + event.getRawY());
+        return super.onTouchEvent(event);
+    }
+}
