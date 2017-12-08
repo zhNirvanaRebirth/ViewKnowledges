@@ -143,5 +143,13 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="柱状图" />
+
+        <Button
+            android:id="@+id/circle_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="圆形进度条" />
     </LinearLayout>
 </ScrollView>

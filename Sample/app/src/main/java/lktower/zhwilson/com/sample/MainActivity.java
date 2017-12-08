@@ -12,6 +12,7 @@ import lktower.zhwilson.com.sample.sections.AnimationActivity;
 import lktower.zhwilson.com.sample.sections.BounceBallActivity;
 import lktower.zhwilson.com.sample.sections.Camera3dRotationActivity;
 import lktower.zhwilson.com.sample.sections.CanvasGraphActivity;
+import lktower.zhwilson.com.sample.sections.CircleProgressActivity;
 import lktower.zhwilson.com.sample.sections.ColorActivity;
 import lktower.zhwilson.com.sample.sections.CoordinateActivity;
 import lktower.zhwilson.com.sample.sections.DrawableClipActivity;
@@ -188,6 +189,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, HistogramActivity.class);
+                startActivity(intent);
+            }
+        });
+        //柱状图
+        Button circleProgress = (Button) findViewById(R.id.circle_progress);
+        circleProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CircleProgressActivity.class);
                 startActivity(intent);
             }
         });
