@@ -21,6 +21,7 @@ import lktower.zhwilson.com.sample.sections.MatrixPolyActivity;
 import lktower.zhwilson.com.sample.sections.PathActivity;
 import lktower.zhwilson.com.sample.sections.PathApplyActivity;
 import lktower.zhwilson.com.sample.sections.PathMeasureActivity;
+import lktower.zhwilson.com.sample.sections.PieChartActivity;
 import lktower.zhwilson.com.sample.sections.PropertyAnimationActivity;
 import lktower.zhwilson.com.sample.sections.SlipActivity;
 import lktower.zhwilson.com.sample.sections.ViewColorActivity;
@@ -192,12 +193,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //柱状图
+        //圆形进度条
         Button circleProgress = (Button) findViewById(R.id.circle_progress);
         circleProgress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CircleProgressActivity.class);
+                startActivity(intent);
+            }
+        });
+        //饼状图
+        Button pieChart = (Button) findViewById(R.id.pie_chart);
+        pieChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PieChartActivity.class);
                 startActivity(intent);
             }
         });
