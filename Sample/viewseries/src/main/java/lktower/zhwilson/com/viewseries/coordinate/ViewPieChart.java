@@ -4,9 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import lktower.zhwilson.com.viewseries.coordinate.entity.PieChartData;
 public class ViewPieChart extends View {
     private static int PIE_RADIUS = 100;//饼状图半径，单位dp
     private static int CHAR_SIZE = 16;//字符的大小，单位sp
+    private static int PIE_NOTE_DISTANCE = 30;//注释文字与圆左/右侧的距离，单位dp
     private static int NOTE_LINE_LENGTH = 10;//注释线的长度，单位dp
     private static int NOTE_STR_MAX_WIDTH = 30;//注释文字最大宽度，单位dp
     private static int MAIN_PART_TRANS = 8;//占比最大的扇形与圆心的距离，单位dp
@@ -30,6 +34,7 @@ public class ViewPieChart extends View {
 
     private float pieRadius = dp2px(PIE_RADIUS);//饼状图半径，单位px
     private float noteLineLength = dp2px(NOTE_LINE_LENGTH);//注释线长度，单位px
+    private float pieNoteDistance = dp2px(PIE_NOTE_DISTANCE);//注释文字与圆左/右侧的距离，单位px
     private float noteStrMaxWidth = dp2px(NOTE_STR_MAX_WIDTH);//注释文字最大宽度，单位px
     private float mainPartTrans = dp2px(MAIN_PART_TRANS);////占比最大的扇形与圆心的距离，单位px
     private float piePadding = dp2px(PIE_PADDING);
@@ -45,6 +50,7 @@ public class ViewPieChart extends View {
     private int height;//view高
 
     private Paint notePaint;//注释文字画笔
+    private Paint noteLinePaint;//注释线画笔
     private Paint arcPaint;//扇形区域画笔
 
     private List<PieChartData> datas;
@@ -66,6 +72,9 @@ public class ViewPieChart extends View {
         notePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         notePaint.setTextSize(charSize);
         notePaint.setColor(noteTextColor);
+
+        noteLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        noteLinePaint.setColor(noteTextColor);
 
         arcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         arcPaint.setStyle(Paint.Style.FILL);
@@ -108,7 +117,7 @@ public class ViewPieChart extends View {
 
     @Override
     protected int getSuggestedMinimumWidth() {
-        return (int) (pieRadius * 2 + (drawNote ? noteLineLength * 2 + noteStrMaxWidth * 2 : 0) + (withMainPartTrans ? mainPartTrans : 0));
+        return (int) (pieRadius * 2 + (drawNote ? pieNoteDistance * 2 + noteStrMaxWidth * 2 : 0) + (withMainPartTrans ? mainPartTrans : 0));
     }
 
     @Override
@@ -132,8 +141,61 @@ public class ViewPieChart extends View {
             return;
         RectF rectF = new RectF(-pieRadius, -pieRadius, pieRadius, pieRadius);
         drawArc(canvas, rectF);
+        if (drawNote) drawNote(canvas);
     }
 
+    //添加占比注释  注释线绘制思路：分段，扇形边缘一段，注释文字的地方一段，然后再连接着连段的端点，区别在于文字的影响（本来注释文字那一段应该和扇形边缘那段的端点在一条水平线上，但是因为两组注释的文字可能遮挡，所以可能会移动文字的位置，导致这两段的端点不在一条水平线上，这时就出现了三段线段）
+    private void drawNote(Canvas canvas) {
+        float fontSpacing = notePaint.getFontSpacing();
+        RectF rightRectF = new RectF();//用来记录右侧有文字的区域
+        RectF leftRectF = new RectF();//用来记录左侧有文字的区域
+        boolean leftRecord = false;
+        for (int i = 0; i < datas.size(); i++) {
+            //先画扇形边缘注释线
+            PointF start = new PointF();
+            PointF end = new PointF();
+            double radians = datas.get(i).getCentralAngle() * Math.PI / 180;
+            start.x = (float) (pieRadius * Math.cos(radians));
+            start.y = (float) (pieRadius * Math.sin(radians));
+            end.x = (float) (start.x + noteLineLength * Math.cos(radians));
+            end.y = (float) (start.y + noteLineLength * Math.sin(radians));
+            canvas.drawLine(start.x, start.y, end.x, end.y, noteLinePaint);
+
+            //绘制注释文字，当扇形的边缘中心在圆的右侧（0-90和270-360度），则注释文字绘制在右侧，否则在左边
+            PointF nodePointF = new PointF();
+            PointF textPointF = new PointF();
+            textPointF.y = end.y;
+            if (radians < Math.PI / 2 || radians > Math.PI * 3 / 2) {//右侧
+                if (i == 0) {
+                    rightRectF.top = textPointF.y - fontSpacing;
+                    rightRectF.bottom = textPointF.y;
+                }
+                if (radians < Math.PI / 2) {
+                    textPointF.y = textPointF.y - fontSpacing < rightRectF.bottom ? rightRectF.bottom + fontSpacing : textPointF.y;
+                    rightRectF.bottom = textPointF.y;
+                } else {
+                    textPointF.y = textPointF.y > rightRectF.top ? rightRectF.top : textPointF.y;
+                    rightRectF.top = textPointF.y - fontSpacing;
+                }
+                textPointF.x = pieRadius + pieNoteDistance;
+                notePaint.setTextAlign(Paint.Align.LEFT);
+                nodePointF.x = textPointF.x - noteLineLength;
+            } else {
+                if (!leftRecord) {
+                    leftRectF.top = textPointF.y - fontSpacing;
+                    leftRectF.bottom = textPointF.y;
+                }
+                textPointF.y = textPointF.y > leftRectF.top ? leftRectF.top : textPointF.y;
+                leftRectF.top = textPointF.y - fontSpacing;
+                textPointF.x = -(pieRadius + pieNoteDistance);
+                notePaint.setTextAlign(Paint.Align.RIGHT);
+                nodePointF.x = textPointF.x + noteLineLength;
+            }
+            nodePointF.y = textPointF.y;
+            canvas.drawLine(textPointF.x, textPointF.y, nodePointF.x, nodePointF.y, noteLinePaint);
+            canvas.drawText(datas.get(i).getNote(), textPointF.x, textPointF.y, notePaint);
+        }
+    }
     //画扇形
     private void drawArc(Canvas canvas, RectF rectF) {
         float startAngle = 0.0f;
