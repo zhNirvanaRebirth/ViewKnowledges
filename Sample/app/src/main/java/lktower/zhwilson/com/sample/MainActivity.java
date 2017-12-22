@@ -1,6 +1,7 @@
 package lktower.zhwilson.com.sample;
 
 import android.content.Intent;
+import android.graphics.LinearGradient;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import lktower.zhwilson.com.sample.sections.AndroidStartActivity;
 import lktower.zhwilson.com.sample.sections.AnimationActivity;
 import lktower.zhwilson.com.sample.sections.BounceBallActivity;
 import lktower.zhwilson.com.sample.sections.Camera3dRotationActivity;
@@ -18,6 +20,7 @@ import lktower.zhwilson.com.sample.sections.CoordinateActivity;
 import lktower.zhwilson.com.sample.sections.DrawableClipActivity;
 import lktower.zhwilson.com.sample.sections.HistogramActivity;
 import lktower.zhwilson.com.sample.sections.MatrixPolyActivity;
+import lktower.zhwilson.com.sample.sections.PaintProbeActivity;
 import lktower.zhwilson.com.sample.sections.PathActivity;
 import lktower.zhwilson.com.sample.sections.PathApplyActivity;
 import lktower.zhwilson.com.sample.sections.PathMeasureActivity;
@@ -211,6 +214,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //Paint详解
+        Button paintProbe = (Button) findViewById(R.id.paint_probe);
+        paintProbe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PaintProbeActivity.class);
+                startActivity(intent);
+            }
+        });
+        //Android启动动画
+        Button startAnim = (Button) findViewById(R.id.start_anim);
+        startAnim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AndroidStartActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 }
