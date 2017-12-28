@@ -10,6 +10,20 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/zomibe_rrr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="丧尸跑跑跑" />
+
+        <Button
+            android:id="@+id/canvas_probe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Canvas操作" />
+
+        <Button
             android:id="@+id/view_coordinate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

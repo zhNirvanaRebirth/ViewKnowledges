@@ -13,6 +13,7 @@ import lktower.zhwilson.com.sample.sections.AndroidStartActivity;
 import lktower.zhwilson.com.sample.sections.AnimationActivity;
 import lktower.zhwilson.com.sample.sections.BounceBallActivity;
 import lktower.zhwilson.com.sample.sections.Camera3dRotationActivity;
+import lktower.zhwilson.com.sample.sections.CanvasActivity;
 import lktower.zhwilson.com.sample.sections.CanvasGraphActivity;
 import lktower.zhwilson.com.sample.sections.CircleProgressActivity;
 import lktower.zhwilson.com.sample.sections.ColorActivity;
@@ -30,6 +31,7 @@ import lktower.zhwilson.com.sample.sections.SlipActivity;
 import lktower.zhwilson.com.sample.sections.ViewColorActivity;
 import lktower.zhwilson.com.sample.sections.ViewCoordinateActivity;
 import lktower.zhwilson.com.sample.sections.ViewProcessActivity;
+import lktower.zhwilson.com.sample.sections.ZombieActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -229,6 +231,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AndroidStartActivity.class);
+                startActivity(intent);
+            }
+        });
+        //Canvas操作
+        Button canvasProbe = (Button) findViewById(R.id.canvas_probe);
+        canvasProbe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CanvasActivity.class);
+                startActivity(intent);
+            }
+        });
+        //丧尸跑跑跑（canvas绘制图片不同的区域）
+        Button zombieRRR = (Button) findViewById(R.id.zomibe_rrr);
+        zombieRRR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ZombieActivity.class);
                 startActivity(intent);
             }
         });
