@@ -1,11 +1,8 @@
 package lktower.zhwilson.com.sample;
 
 import android.content.Intent;
-import android.graphics.LinearGradient;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,6 +17,7 @@ import lktower.zhwilson.com.sample.sections.ColorActivity;
 import lktower.zhwilson.com.sample.sections.CoordinateActivity;
 import lktower.zhwilson.com.sample.sections.DrawableClipActivity;
 import lktower.zhwilson.com.sample.sections.HistogramActivity;
+import lktower.zhwilson.com.sample.sections.LoadingProgressActivity;
 import lktower.zhwilson.com.sample.sections.MatrixPolyActivity;
 import lktower.zhwilson.com.sample.sections.PaintProbeActivity;
 import lktower.zhwilson.com.sample.sections.PathActivity;
@@ -249,6 +247,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ZombieActivity.class);
+                startActivity(intent);
+            }
+        });
+        //进度条
+        Button loadingProcess = (Button) findViewById(R.id.loading_progress);
+        loadingProcess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoadingProgressActivity.class);
                 startActivity(intent);
             }
         });
