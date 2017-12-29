@@ -32,10 +32,13 @@ public class LoadingProgress extends View {
     private static final int PROGRESS_RECT_COLOR = Color.parseColor("#ffa800");//进度条颜色
     private static final int ROUND_COLOR = Color.parseColor("#fbcd4e");//背景圆的颜色
     private static final int STROKE_COLOR = Color.parseColor("#ffffff");//背景圆圈的边框颜色
+    private static final int PERCENT_COLOR = Color.parseColor("#ffffff");//完成提示文字颜色
     private static final int LEAVES_NUM = 10;//叶子的数量
     private static final int LEAF_WIDTH = 11;//叶子的宽度，单位dp
     private static final int LEAF_HEIGHT = 6;//叶子的高度，单位dp
     private static final int LEAF_FLOAT_STEP = 5;//叶子飘动步长，单位dp
+    private static final int TEXT_SIZE = 16;//完成提示文字大小，单位sp
+    private static final String COMPLETE = "100%";
 
     private float radius = dp2px(RADIUS);//进度条内部圆角半径，单位：px
     private float margin = dp2px(MARGIN);//进度条与外部圆角进度条Rect的margin，单位：px
@@ -44,9 +47,11 @@ public class LoadingProgress extends View {
     private int progressRectColor = PROGRESS_RECT_COLOR;
     private int roundColor = ROUND_COLOR;
     private int strokeColor = STROKE_COLOR;
+    private int textColor = PERCENT_COLOR;
     private int leavesNum = LEAVES_NUM;
     private float leafWidth = dp2px(LEAF_WIDTH);
     private float leafHeight = dp2px(LEAF_HEIGHT);
+    private float textSize = sp2px(TEXT_SIZE);
 
     private int width;//view宽度
     private int height;//view高度
@@ -55,18 +60,25 @@ public class LoadingProgress extends View {
     private Paint circlePaint;//圆圈Paint
     private Paint roundPaint;//圆形Paint
     private Paint progressPaint;//进度条Paint
+    private Paint textPaint;//文字Paint
 
     private Bitmap fans;
-    Matrix fansMatrix = new Matrix();
+    private Matrix fansMatrix = new Matrix();
 
     private float progress = 0;//当前的进度
     private PictureDrawable progressPictureDrawable;
+    private float current;//当前进度条长度
 
     private Bitmap leaf;
     private List<LeafData> leaves;
     private int floatingLeaves = 1;//记录飘飞的叶子（用于开始时，一片一片的产生叶子）
     private float floatingStep = dp2px(LEAF_FLOAT_STEP);
     private LeafData lastLeaf;//记录产生的最后一片叶子
+    private boolean done = false;//完成
+    private float offset;
+
+    private float fontSpacing;//完成提示文字的高度
+    private float textScale = 0;//完成提示文字的缩放比例
 
     public LoadingProgress(Context context) {
         this(context, null);
@@ -101,6 +113,12 @@ public class LoadingProgress extends View {
 
         progressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         progressPaint.setColor(progressRectColor);
+
+        textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaint.setColor(textColor);
+        textPaint.setTextSize(textSize);
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        fontSpacing = textPaint.getFontSpacing();
     }
 
     @Override
@@ -136,21 +154,25 @@ public class LoadingProgress extends View {
         width = w;
         height = h;
         initProgressPicture();
+        offset = (float) Math.sqrt(leafWidth * leafWidth + leafHeight * leafHeight);
         initLeaves();
+    }
+
+    private LeafData genLeaf() {
+        LeafData leaf = new LeafData();
+        double random = Math.random();
+        leaf.rangeY = (float) (random * (radius - leafHeight) + leafHeight - offset / 2);
+        leaf.reverse = random > Math.random() ? true : false;
+        leaf.period = Math.random() < 0.5 ? width - radius - margin * 2 : (width - radius - margin * 2) / 2;
+        leaf.p.x = width - radius - margin;
+        leaf.p.y = radius + margin;
+        return leaf;
     }
 
     private void initLeaves() {
         leaves = new ArrayList<>();
-        float offset = (float) Math.sqrt(leafWidth * leafWidth + leafHeight * leafHeight);
         for (int i = 0; i < leavesNum; i++) {
-            LeafData leaf = new LeafData();
-            double random = Math.random();
-            leaf.rangeY = (float) (random * (radius - leafHeight) + leafHeight - offset / 2);
-            leaf.reverse = random > Math.random() ? true : false;
-            leaf.period = Math.random() < 0.5 ? width - radius - margin * 2 : (width - radius - margin * 2) / 2;
-            leaf.p.x = width - radius - margin;
-            leaf.p.y = radius + margin;
-            leaves.add(leaf);
+            leaves.add(genLeaf());
         }
     }
 
@@ -180,38 +202,57 @@ public class LoadingProgress extends View {
         canvas.drawCircle(width - radius - margin, radius + margin, radius + margin - circleStrokeWidth, roundPaint);
         //绘制圆圈内的扇叶
         drawFans(canvas);
+        //绘制完成文字
+        drawText(canvas);
         postInvalidate();
+    }
+
+    private void drawText(Canvas canvas) {
+        if (!done) return;
+        canvas.save();
+        canvas.translate(width - radius - margin, margin + radius);
+        Matrix textMatrix = new Matrix();
+        textMatrix.postScale(textScale, textScale);
+        canvas.concat(textMatrix);
+        canvas.drawText(COMPLETE, 0, fontSpacing / 4, textPaint);
+        canvas.restore();
+        textScale += 0.05f;
+        if (textScale >= 1.0f) textScale = 1.0f;
     }
 
     private void drawFans(Canvas canvas) {
         canvas.save();
         canvas.translate(width - radius - margin, margin + radius);
         fansMatrix.postRotate(10);
+        if (done) {
+            fansMatrix.postScale(0.9f, 0.9f);
+        }
         canvas.concat(fansMatrix);
         canvas.drawBitmap(fans, new Rect(0, 0, fans.getWidth(), fans.getHeight()), new RectF(-radius + circleStrokeWidth, -radius + circleStrokeWidth, radius - circleStrokeWidth, radius - circleStrokeWidth), new Paint(Paint.ANTI_ALIAS_FLAG));
         canvas.restore();
     }
 
     private void drawProgress(Canvas canvas) {
-        progress += 0.5f;
         progress = Math.min(progress, 100);
-        float current = (width - margin * 2) * progress / 100;//当前需要画的进度条长度
+        current = (width - margin * 2) * progress / 100;//当前需要画的进度条长度
         canvas.save();
         canvas.translate(0, margin);
         progressPictureDrawable.setBounds(0, 0, (int) current, (int) (radius * 2));
         progressPictureDrawable.draw(canvas);
+        if (progress == 100) done = true;
         canvas.restore();
     }
 
     private void drawLeaves(Canvas canvas) {
+        if (done) return;
         for (int i = 0; i < floatingLeaves; i++) {
             canvas.save();
             canvas.translate(leaves.get(i).p.x, leaves.get(i).p.y);
             leaves.get(i).matrix.postRotate(10);
             canvas.concat(leaves.get(i).matrix);
             canvas.drawBitmap(leaf, new Rect(0, 0, leaf.getWidth(), leaf.getHeight()), new RectF(-leafWidth / 2, -leafHeight / 2, leafWidth / 2, leafHeight / 2), new Paint(Paint.ANTI_ALIAS_FLAG));
-            calculateLeafPosition(leaves.get(i));
             increaseLeaf();
+            calculateLeafPosition(leaves.get(i));
             canvas.restore();
         }
     }
@@ -219,9 +260,10 @@ public class LoadingProgress extends View {
     private void calculateLeafPosition(LeafData leaf) {
         leaf.p.x -= floatingStep;
         leaf.floatingDest += floatingStep;
-        if (leaf.p.x <= margin) {
+        if (leaf.p.x <= margin + current) {
             leaf.p.x = width - radius - margin;
             leaf.floatingDest = 0;
+            progress += 2f;
         }
         float y = (float) (Math.sin((leaf.floatingDest / leaf.period) * Math.PI * 2) * leaf.rangeY);
         y = leaf.reverse ? -y : y;
@@ -229,9 +271,9 @@ public class LoadingProgress extends View {
     }
 
     private void increaseLeaf() {
-        lastLeaf = leaves.get(floatingLeaves - 1);
         if (floatingLeaves < leavesNum) {
-            if (lastLeaf.p.x < width - radius * 2 - margin * 2) {
+            lastLeaf = leaves.get(floatingLeaves - 1);
+            if (lastLeaf.p.x < (width - radius * 2 - margin * 2) * Math.random()) {
                 floatingLeaves++;
                 lastLeaf = leaves.get(floatingLeaves - 1);
             }
@@ -241,5 +283,9 @@ public class LoadingProgress extends View {
     private float dp2px(float dp) {
         float density = getResources().getDisplayMetrics().density;
         return density * dp + 0.5f;
+    }
+
+    private float sp2px(float sp) {
+        return getResources().getDisplayMetrics().scaledDensity * sp;
     }
 }
