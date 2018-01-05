@@ -10,6 +10,13 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/matrix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Matrix" />
+
+        <Button
             android:id="@+id/loading_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

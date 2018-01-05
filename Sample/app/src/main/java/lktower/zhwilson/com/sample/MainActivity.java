@@ -19,6 +19,7 @@ import lktower.zhwilson.com.sample.sections.DrawableClipActivity;
 import lktower.zhwilson.com.sample.sections.HistogramActivity;
 import lktower.zhwilson.com.sample.sections.LoadingProgressActivity;
 import lktower.zhwilson.com.sample.sections.MatrixPolyActivity;
+import lktower.zhwilson.com.sample.sections.MatrixProbeActivity;
 import lktower.zhwilson.com.sample.sections.PaintProbeActivity;
 import lktower.zhwilson.com.sample.sections.PathActivity;
 import lktower.zhwilson.com.sample.sections.PathApplyActivity;
@@ -256,6 +257,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoadingProgressActivity.class);
+                startActivity(intent);
+            }
+        });
+        //Matrix
+        Button matrix = (Button) findViewById(R.id.matrix);
+        matrix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MatrixProbeActivity.class);
                 startActivity(intent);
             }
         });

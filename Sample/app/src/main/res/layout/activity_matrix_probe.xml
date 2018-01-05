@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<Button-->
+    <!--android:id="@+id/change_camera_position"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:text="increase"/>-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:orientation="horizontal">-->
+    <!--<RadioGroup-->
+    <!--android:id="@+id/point_count"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:gravity="center_horizontal">-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/zero"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--/>-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/one"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--/>-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/two"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--/>-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/three"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--/>-->
+    <!--<RadioButton-->
+    <!--android:id="@+id/four"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--/>-->
+    <!--</RadioGroup>-->
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width=""
+            android:layout_height="" />
+
+        <RadioGroup
+            android:id="@+id/axis_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/axis_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="x" />
+
+            <RadioButton
+                android:id="@+id/axis_y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="y" />
+
+            <RadioButton
+                android:id="@+id/axis_z"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="z" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/start_rotate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="start" />
+    </LinearLayout>
+
+    <lktower.zhwilson.com.viewseries.coordinate.MatrixProbe
+        android:id="@+id/matrix_probe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
