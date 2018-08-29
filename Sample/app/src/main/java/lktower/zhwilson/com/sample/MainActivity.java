@@ -1,10 +1,15 @@
 package lktower.zhwilson.com.sample;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.*;
 
 import lktower.zhwilson.com.sample.sections.AndroidStartActivity;
 import lktower.zhwilson.com.sample.sections.AnimationActivity;
@@ -16,6 +21,8 @@ import lktower.zhwilson.com.sample.sections.CircleProgressActivity;
 import lktower.zhwilson.com.sample.sections.ColorActivity;
 import lktower.zhwilson.com.sample.sections.CoordinateActivity;
 import lktower.zhwilson.com.sample.sections.DrawableClipActivity;
+import lktower.zhwilson.com.sample.sections.EventDispatchActivity;
+import lktower.zhwilson.com.sample.sections.FoldSideBarActivity;
 import lktower.zhwilson.com.sample.sections.HistogramActivity;
 import lktower.zhwilson.com.sample.sections.LoadingProgressActivity;
 import lktower.zhwilson.com.sample.sections.MatrixPolyActivity;
@@ -26,7 +33,9 @@ import lktower.zhwilson.com.sample.sections.PathApplyActivity;
 import lktower.zhwilson.com.sample.sections.PathMeasureActivity;
 import lktower.zhwilson.com.sample.sections.PieChartActivity;
 import lktower.zhwilson.com.sample.sections.PropertyAnimationActivity;
+import lktower.zhwilson.com.sample.sections.RotateContainerActivity;
 import lktower.zhwilson.com.sample.sections.SlipActivity;
+import lktower.zhwilson.com.sample.sections.SpecialViewActivity;
 import lktower.zhwilson.com.sample.sections.ViewColorActivity;
 import lktower.zhwilson.com.sample.sections.ViewCoordinateActivity;
 import lktower.zhwilson.com.sample.sections.ViewProcessActivity;
@@ -269,6 +278,45 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //3D旋转容器
+        Button rotateContainer = (Button) findViewById(R.id.rotate_container);
+        rotateContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RotateContainerActivity.class);
+                startActivity(intent);
+            }
+        });
+        //事件分发机制
+        Button eventDispatch = (Button) findViewById(R.id.event_dispatch);
+        eventDispatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, EventDispatchActivity.class);
+                startActivity(intent);
+            }
+        });
+        //折叠侧边栏
+        Button foldSideBar = (Button) findViewById(R.id.fold_side_bar);
+        foldSideBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, FoldSideBarActivity.class);
+                startActivity(intent);
+            }
+        });
+        //特殊控件点击
+        Button specialView = (Button) findViewById(R.id.special_view);
+        specialView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SpecialViewActivity.class);
+                startActivity(intent);
+            }
+        });
+        specialView.animate().setInterpolator(new FastOutSlowInInterpolator()).translationX(100);
+        ValueAnimator animator = ValueAnimator.ofFloat();
+        java.util.ArrayList
 
     }
 

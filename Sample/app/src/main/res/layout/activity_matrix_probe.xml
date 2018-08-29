@@ -55,10 +55,6 @@
         android:layout_height="100dp"
         android:orientation="vertical">
 
-        <EditText
-            android:layout_width=""
-            android:layout_height="" />
-
         <RadioGroup
             android:id="@+id/axis_switch"
             android:layout_width="match_parent"

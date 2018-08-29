@@ -116,6 +116,23 @@
             android:name=".sections.MatrixProbeActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".sections.RotateContainerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".sections.EventDispatchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".sections.FoldSideBarActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FoldSideBarTheme" />
+        <activity
+            android:name=".sections.SpecialViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>

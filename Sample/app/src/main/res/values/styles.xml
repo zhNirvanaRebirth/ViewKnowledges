@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="FoldSideBarTheme" parent="AppTheme">
+        <item name="FoldSideBarStyle">@style/FoldSideBarStyle_Def</item>
+    </style>
+
+    <style name="FoldSideBarStyle_Def">
+        <item name="side_bar_width">120dp</item>
+        <item name="fold_num">10</item>
+        <item name="content_background">@drawable/ddd</item>
+        <item name="side_bar_background">@drawable/side</item>
+    </style>
+
 </resources>

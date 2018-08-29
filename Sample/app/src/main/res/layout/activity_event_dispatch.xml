@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lktower.zhwilson.com.viewseries.coordinate.EventDispatchViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <lktower.zhwilson.com.viewseries.coordinate.EventDispatchView
+        android:id="@+id/event_dispatch_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_green_light" />
+</lktower.zhwilson.com.viewseries.coordinate.EventDispatchViewGroup>

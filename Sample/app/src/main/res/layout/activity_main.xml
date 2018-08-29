@@ -10,6 +10,34 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/special_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="特殊控件的点击" />
+
+        <Button
+            android:id="@+id/fold_side_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="折叠侧边栏" />
+
+        <Button
+            android:id="@+id/event_dispatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="事件分发" />
+
+        <Button
+            android:id="@+id/rotate_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="3D旋转容器" />
+
+        <Button
             android:id="@+id/matrix"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
